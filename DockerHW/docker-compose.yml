@@ -1,14 +1,9 @@
-version: '3'
+version: '3.8'
 
 services:
   web:
-    build: ./web
+    build: .
     ports:
-      - "5000:5000"
-    volumes:
-      - ./web:/app
-    depends_on:
-      -redis
-
-    redis:
-      image: redis:latest
+      - "5000:80"
+    
+   
