@@ -21,8 +21,6 @@ testcases = [
 def test_isMatch(solution, s, p, expected):
     assert solution.isMatch(s, p) == expected
 
-# Moving the failed test case into a new function and marking it as expected to fail
-@pytest.mark.xfail
 def test_broken_solution(solution):
     # This is just an example test that we expect to fail (Modify according to your case)
     assert solution.isMatch("a", ".*") == False  # This test is expected to fail
