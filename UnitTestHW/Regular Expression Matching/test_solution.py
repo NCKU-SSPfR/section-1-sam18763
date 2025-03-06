@@ -1,5 +1,5 @@
 import pytest
-from solution import Solution  # Assuming the Solution class is in a file called solution.py
+from solution import Solution 
 
 @pytest.fixture
 def solution():
