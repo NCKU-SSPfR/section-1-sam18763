@@ -6,7 +6,10 @@ WORKDIR /app
 
 COPY requirements.txt /app/
 
+RUN pip install --no-cache-dir -r /app/requirements.txt
 
+COPY --chown=myuser:myuser ./src/ /app/src
+USER myuser
 
 EXPOSE 8000
 
