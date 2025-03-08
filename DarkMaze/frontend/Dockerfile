@@ -8,10 +8,10 @@ RUN groupadd -r appgroup && \
     chmod 775 /app
 
 COPY --chown=appuser:appgroup ./requirements.txt /app/requirements.txt
+RUN pip install --no-cache-dir -r /app/requirements.txt
 COPY --chown=appuser:appgroup ./src /app/src
-RUN pip install -r /app/requirements.txt
 
-EXPOSE 8088
+
 
 USER appuser
 
