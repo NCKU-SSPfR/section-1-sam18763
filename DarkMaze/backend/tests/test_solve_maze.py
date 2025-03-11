@@ -19,18 +19,17 @@ async def login_request():
 
 async def reset_request():
     """Reset Game state"""
-    global game_state
 
     async with httpx.AsyncClient() as client:
         response = await client.get(RESET_URL)
 
     assert response.status_code == 200  # Ensure the request was successful
+    global game_state
     game_state = response.json()
     assert game_state["current_position"] == [1, 0]
 
 async def move_request(dir):
     """Simulates a frontend move request."""
-    global game_state
 
     payload = {"username": USERNAME, "direction": dir}
     
@@ -38,6 +37,7 @@ async def move_request(dir):
         response = await client.post(MOVE_URL, json=payload)
 
     assert response.status_code == 200  # Ensure the request was successful
+    global game_state
     game_state = response.json()
     assert game_state["health"] >= 3
 
@@ -47,7 +47,7 @@ async def test_integration():
     #print(game_state)
     await reset_request()
     #print(game_state)
-    for i in range(5):
+    for _ in range(5):
         await move_request("down")
         #print(game_state)
     assert game_state["current_position"] == [1,5]
@@ -56,23 +56,22 @@ async def test_integration():
 async def test_solver():
     await login_request()
     await reset_request()
-
-    for i in range(5):
+    for _ in range(5):
         await move_request("down")
-    await move_request("right")    
+    await move_request("right")
     await move_request("down")
-    for i in range(2):
+    for _ in range(2):
         await move_request("right")
-    for i in range(4):
+    for _ in range(4):
         await move_request("up")
-    for i in range(2):
+    for _ in range(2):
         await move_request("right")
     await move_request("down")
-    for i in range(2):
-        await move_request("right")        
+    for _ in range(2):
+        await move_request("right")
     await move_request("down")
     await move_request("right")
     await move_request("down")
-    
     #print(game_state)
+    global game_state
     assert game_state["health"] == 666
