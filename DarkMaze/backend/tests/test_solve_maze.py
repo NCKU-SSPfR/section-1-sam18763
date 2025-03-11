@@ -46,7 +46,7 @@ async def move_request(dir):
 async def test_integration():
     await login_request()
     await reset_request()
-    for i in range(5):
+    for _ in range(5):
         await move_request("down")
     assert game_state["current_position"] == [1,5]
 
