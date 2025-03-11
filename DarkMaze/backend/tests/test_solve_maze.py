@@ -19,8 +19,8 @@ async def login_request():
 
 async def reset_request():
     """Reset Game state"""
-    global game_state  # 加上這行
-    
+    global game_state
+
     async with httpx.AsyncClient() as client:
         response = await client.get(RESET_URL)
 
@@ -30,8 +30,7 @@ async def reset_request():
 
 async def move_request(dir):
     """Simulates a frontend move request."""
-
-    global game_state  # 加上這行
+    global game_state
 
     payload = {"username": USERNAME, "direction": dir}
     
@@ -45,31 +44,35 @@ async def move_request(dir):
 @pytest.mark.asyncio
 async def test_integration():
     await login_request()
+    #print(game_state)
     await reset_request()
-    for _ in range(5):
+    #print(game_state)
+    for i in range(5):
         await move_request("down")
+        #print(game_state)
     assert game_state["current_position"] == [1,5]
 
-#補上過關方法
 @pytest.mark.asyncio
 async def test_solver():
     await login_request()
     await reset_request()
-    for _ in range(5):
+
+    for i in range(5):
         await move_request("down")
-    await move_request("right")
+    await move_request("right")    
     await move_request("down")
-    for _ in range(2):
+    for i in range(2):
         await move_request("right")
-    for _ in range(4):
+    for i in range(4):
         await move_request("up")
-    for _ in range(2):
+    for i in range(2):
         await move_request("right")
     await move_request("down")
-    for _ in range(2):
-        await move_request("right")
+    for i in range(2):
+        await move_request("right")        
     await move_request("down")
     await move_request("right")
-    for _ in range(2):
-        await move_request("down")
+    await move_request("down")
+    
+    #print(game_state)
     assert game_state["health"] == 666
