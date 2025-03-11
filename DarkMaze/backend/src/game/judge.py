@@ -6,7 +6,7 @@ def _parse_map(map_string, map_size, reversal_nodes=[]):
     width, height = map_size
     filtered_chars = re.sub(r'[^a-zA-Z]', '', map_string)
     
-    bianry_map = [bin(ord(c))[2:].zfill(8) for c in filtered_chars]
+    binary_map = [bin(ord(c))[2:].zfill(8) for c in filtered_chars]
     
     re_map = []
     for binary in binary_map:
