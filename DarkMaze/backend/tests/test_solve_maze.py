@@ -55,7 +55,7 @@ async def test_integration():
 async def test_solver():
     await login_request()
     await reset_request()
-    for i in range(5):
+    for _ in range(5):
         await move_request("down")
     await move_request("right")
     await move_request("down")
