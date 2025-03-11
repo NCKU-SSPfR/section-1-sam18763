@@ -12,4 +12,4 @@ RUN chown -R myuser:myuser /app
 COPY --chown=myuser:myuser ./src/ /app/src
 USER myuser
 
-CMD ["uvicorn", "src.main:app", "--host", "0.0.0.0", "--port", "8000"]
+CMD ["uvicorn", "src.main:app", "--host", "0.0.0.0", "--port", "8088", "--reload"]
