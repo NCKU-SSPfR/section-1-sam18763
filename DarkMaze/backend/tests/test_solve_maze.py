@@ -50,6 +50,7 @@ async def test_integration():
         await move_request("down")
     assert game_state["current_position"] == [1,5]
 
+#補上過關方法
 @pytest.mark.asyncio
 async def test_solver():
     await login_request()
